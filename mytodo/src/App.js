@@ -7,11 +7,25 @@ const reducer = (todos, actions) => {
   switch (actions.type) {
     case ACTIONS.TODO_ADD:
       return [...todos, newTodoAdd(actions.payload.name)];
-  }
+
+    case ACTIONS.TODO_COMP:
+      return todos.map((todo)=>{
+        if (todo.id === actions.id) {
+          return{...todo, tamam: !todo.tamam}
+      }
+      return {...todo};
+  });
+  case ACTIONS.TODO_DEL:
+    return todos.filter((todo) => todo.id !== actions.id);
+
+  default: 
+    return todos;
+
+}
 };
 
 const newTodoAdd = (name) => {
-  return { id: Date.now(), name };
+  return { id: Date.now(), name, tamam: false };
 };
 
 
@@ -37,7 +51,7 @@ function App() {
       </form>
 
       {todos.map(todo => (
-          <Todo key={todo.id} todo={todo} />
+          <Todo key={todo.id} todo={todo} dispatch={dispatch} />
       )) }
     </div>
   )
