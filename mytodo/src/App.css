@@ -94,6 +94,7 @@
   .completed {
     text-decoration: line-through;
     opacity: 0.5;
+    background-color: aqua;
   }
   
   /*CUSTOM SELECTOR */
